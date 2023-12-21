@@ -6,6 +6,7 @@ import Footer from './Components/Layout/Footer';
 import NotFound from './Components/Layout/NotFound/NotFound';
 import Login from './Components/Auth/Login/Login';
 import Signup from './Components/Auth/Signup/Signup';
+import Services from './Components/ServicesPage/Services';
 
 function App() {
   const renderHeader = element => {
@@ -29,6 +30,7 @@ function App() {
         <Route path="*" element={renderHeader(<NotFound />)} />
         <Route path="/login" element={renderHeader(<Login />)} />
         <Route path="/register" element={renderHeader(<Signup />)} />
+        <Route path="/services" element={renderHeader(<Services />)} />
       </Routes>
       <Footer />
     </Router>
