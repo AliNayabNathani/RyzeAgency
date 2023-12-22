@@ -35,6 +35,28 @@ import { useNavigate } from 'react-router-dom';
 import { FiChevronDown } from 'react-icons/fi';
 
 export default function WithSubnavigation({ isAuthenticated, user }) {
+  const navItems = isAuthenticated
+    ? [
+        {
+          label: 'Dashboard',
+          href: '/dashboard',
+        },
+        {
+          label: 'New Orders',
+          href: '#',
+        },
+        {
+          label: 'My Orders',
+          href: '#',
+        },
+      ]
+    : [
+        {
+          label: 'Services',
+          href: '/services',
+        },
+      ];
+
   const { isOpen, onToggle } = useDisclosure();
   const navigate = useNavigate();
 
@@ -101,7 +123,7 @@ export default function WithSubnavigation({ isAuthenticated, user }) {
             marginInline={{ base: 'none', md: 'auto' }}
             // mr={'10%'}
           >
-            <DesktopNav />
+            <DesktopNav navItems={navItems} />
           </Flex>
         </Flex>
         {isAuthenticated ? (
@@ -198,13 +220,13 @@ export default function WithSubnavigation({ isAuthenticated, user }) {
       </Flex>
 
       <Collapse in={isOpen} animateOpacity>
-        <MobileNav />
+        <MobileNav navItems={navItems} />
       </Collapse>
     </Box>
   );
 }
 
-const DesktopNav = () => {
+const DesktopNav = ({ navItems }) => {
   const linkColor = 'white';
   const linkHoverColor = '#EDF2F7';
   const popoverContentBgColor = '#07041c';
@@ -212,7 +234,7 @@ const DesktopNav = () => {
 
   return (
     <Stack direction={'row'} spacing={8}>
-      {NAV_ITEMS.map(navItem => (
+      {navItems.map(navItem => (
         <Box key={navItem.label}>
           <Box
             as="a"
@@ -276,10 +298,10 @@ const DesktopSubNav = ({ label, href, subLabel }) => {
   );
 };
 
-const MobileNav = () => {
+const MobileNav = ({ navItems }) => {
   return (
     <Stack bg={'#07041c'} p={4} display={{ md: 'none' }}>
-      {NAV_ITEMS.map(navItem => (
+      {navItems.map(navItem => (
         <MobileNavItem key={navItem.label} {...navItem} />
       ))}
     </Stack>
@@ -335,29 +357,3 @@ const MobileNavItem = ({ label, children, href }) => {
     </Stack>
   );
 };
-
-const NAV_ITEMS = [
-  {
-    label: 'Services',
-    href: '/services',
-  },
-  // {
-  //   label: 'More',
-  //   children: [
-  //     {
-  //       label: 'E-Learning Courses',
-
-  //       href: '/e-learning-courses',
-  //     },
-  //     {
-  //       label: 'Community Forum',
-
-  //       href: '/forum',
-  //     },
-  //     {
-  //       label: 'Contact',
-  //       href: '#',
-  //     },
-  //   ],
-  // },
-];

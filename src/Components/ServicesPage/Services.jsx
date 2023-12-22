@@ -1,5 +1,20 @@
 import React, { useState } from 'react';
-import { Box, Button, Container, Input, Stack } from '@chakra-ui/react';
+import {
+  Box,
+  Button,
+  Container,
+  Divider,
+  HStack,
+  Input,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalHeader,
+  ModalOverlay,
+  Stack,
+  useDisclosure,
+} from '@chakra-ui/react';
 import {
   Table,
   Thead,
@@ -13,7 +28,39 @@ import {
 } from '@chakra-ui/react';
 import Select from 'react-select';
 
+// Modal Component
+const ServiceModal = ({ isOpen, onClose, service }) => {
+  return (
+    <Modal isOpen={isOpen} onClose={onClose} size="md">
+      <ModalOverlay />
+      <ModalContent bg={'#1a172e'} color={'white'}>
+        <ModalHeader textAlign={'center'} my={4}>
+          {service.service}
+        </ModalHeader>
+        <ModalCloseButton />
+        <ModalBody bg={'#1a172e'} color={'white'} p={8}>
+          <Stack spacing={4} bg={'#1a172e'} color={'white'}>
+            <Box>ID: {service.id}</Box>
+            <Divider />
+            <Box>Service: {service.service}</Box>
+            <Divider />
+            <Box>Description: {service.description.join(', ')}</Box>
+            <Divider />
+            <Box>Price: {service.price}</Box>
+            <Divider />
+            <Box>Min Quantity: {service.minQuantity}</Box>
+            <Divider />
+            <Box>Max Quantity: {service.maxQuantity}</Box>
+          </Stack>
+        </ModalBody>
+      </ModalContent>
+    </Modal>
+  );
+};
+
 const Services = () => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [selectedService, setSelectedService] = useState(null);
   const options = [
     { value: 'twitchBits', label: 'Twitch Bits' },
     { value: 'twitchSubs', label: 'Twitch Subs' },
@@ -21,8 +68,32 @@ const Services = () => {
     { value: 'twitchBundles', label: 'Twitch Bundles' },
   ];
 
+  const servicesData = [
+    {
+      id: 1,
+      service: 'Twitch Subs',
+      description: ['Cancel', 'Bots', 'Speed 5k Per Day'],
+      price: '$0.625',
+      minQuantity: 10,
+      maxQuantity: 20000,
+    },
+    {
+      id: 2,
+      service: 'Twitch Subs Mix',
+      description: ['Mix quality'],
+      price: '$1.485',
+      minQuantity: 10,
+      maxQuantity: 500000,
+    },
+  ];
+
   const [selectedOption, setSelectedOption] = useState(options[0]);
   const [searchInput, setSearchInput] = useState('');
+
+  const handleMoreClick = service => {
+    setSelectedService(service);
+    onOpen();
+  };
 
   const customStyles = {
     control: (provided, state) => ({
@@ -39,6 +110,10 @@ const Services = () => {
     menu: provided => ({
       ...provided,
       backgroundColor: '#1a172e',
+    }),
+    singleValue: provided => ({
+      ...provided,
+      color: 'white',
     }),
   };
 
@@ -101,29 +176,49 @@ const Services = () => {
               </Tr>
             </Thead>
             <Tbody color={'white'}>
-              <Tr>
-                <Td>1</Td>
-                <Td>Instagram Followers</Td>
-                <Td>
-                  <Box
-                    bg={'rgba(38, 34, 64, 0.5)'}
-                    w={'fit-content'}
-                    borderRadius={'full'}
-                    p={4}
+              {servicesData.map(service => (
+                <Tr key={service.id}>
+                  <Td>{service.id}</Td>
+                  <Td>{service.service}</Td>
+                  <Td>
+                    <HStack>
+                      {service.description.map((item, index) => (
+                        <Box
+                          key={index}
+                          bg={'rgba(38, 34, 64, 0.5)'}
+                          w={'fit-content'}
+                          borderRadius={'full'}
+                          p={4}
+                        >
+                          {item}
+                        </Box>
+                      ))}
+                    </HStack>
+                  </Td>
+                  <Td>{service.price}</Td>
+                  <Td>{service.minQuantity}</Td>
+                  <Td>{service.maxQuantity}</Td>
+                  <Td
+                    color={'#db182c'}
+                    onClick={() => handleMoreClick(service)}
+                    cursor={'pointer'}
                   >
-                    Cancel
-                  </Box>
-                </Td>
-                <Td>$0.625</Td>
-                <Td>10</Td>
-                <Td>20000</Td>
-                <Td color={'#db182c'}>More</Td>
-              </Tr>
+                    More
+                  </Td>
+                </Tr>
+              ))}
             </Tbody>
             <Tfoot></Tfoot>
           </Table>
         </TableContainer>
       </Stack>
+      {selectedService && (
+        <ServiceModal
+          isOpen={isOpen}
+          onClose={onClose}
+          service={selectedService}
+        />
+      )}
     </Container>
   );
 };

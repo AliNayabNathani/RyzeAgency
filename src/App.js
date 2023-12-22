@@ -7,10 +7,11 @@ import NotFound from './Components/Layout/NotFound/NotFound';
 import Login from './Components/Auth/Login/Login';
 import Signup from './Components/Auth/Signup/Signup';
 import Services from './Components/ServicesPage/Services';
+import Dashboard from './Components/Dashboard/Dashboard';
 
 function App() {
   const renderHeader = element => {
-    const isAuthenticated = false;
+    const isAuthenticated = true;
     const user = {
       name: 'Ali Nayab',
     };
@@ -31,6 +32,7 @@ function App() {
         <Route path="/login" element={renderHeader(<Login />)} />
         <Route path="/register" element={renderHeader(<Signup />)} />
         <Route path="/services" element={renderHeader(<Services />)} />
+        <Route path="/dashboard" element={renderHeader(<Dashboard />)} />
       </Routes>
       <Footer />
     </Router>
