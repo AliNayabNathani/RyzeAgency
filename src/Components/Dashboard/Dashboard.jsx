@@ -112,7 +112,7 @@ const Dashboard = () => {
         spacing={['8', '16']}
         padding="8"
       >
-        <VStack>
+        {/* <VStack>
           <Avatar boxSize={'48'} src={UserAvatar} />
 
           <Button
@@ -126,7 +126,7 @@ const Dashboard = () => {
           >
             Change Photo
           </Button>
-        </VStack>
+        </VStack> */}
         <VStack spacing={'4'} alignItems={['center', 'flex-start']}>
           <HStack>
             <Text fontWeight={'bold'} color={'white'}>
@@ -162,7 +162,12 @@ const Dashboard = () => {
             <AddIcon mr={2} />
             Add Funds
           </Button>
-          <Stack direction={['column', 'row']} alignItems="center" mt={4}>
+          <Stack
+            direction={['column', 'row']}
+            alignItems="center"
+            mt={4}
+            spacing={[6, 4]}
+          >
             <Link to="/updateprofile">
               <Button
                 color={'white'}
