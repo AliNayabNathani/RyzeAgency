@@ -7,15 +7,9 @@ import {
   Stack,
   Collapse,
   Icon,
-  Popover,
-  PopoverTrigger,
-  PopoverContent,
   useColorModeValue,
   useDisclosure,
   Image,
-  Input,
-  InputGroup,
-  InputLeftElement,
   HStack,
   Menu,
   MenuButton,
@@ -42,12 +36,16 @@ export default function WithSubnavigation({ isAuthenticated, user }) {
           href: '/dashboard',
         },
         {
+          label: 'Services',
+          href: '/services',
+        },
+        {
           label: 'New Orders',
           href: '/order',
         },
         {
           label: 'My Orders',
-          href: '#',
+          href: '/myorder',
         },
       ]
     : [

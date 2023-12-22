@@ -59,7 +59,7 @@ const NewOrder = () => {
       <Stack
         direction={['column', 'row']}
         justifyContent={'space-between'}
-        w={'90%'}
+        w={['100%', '90%']}
         marginInline={'auto'}
       >
         <Stack

@@ -9,6 +9,7 @@ import Signup from './Components/Auth/Signup/Signup';
 import Services from './Components/ServicesPage/Services';
 import Dashboard from './Components/Dashboard/Dashboard';
 import NewOrder from './Components/New Order/NewOrder';
+import MyOrder from './Components/MyOrders/MyOrder';
 
 function App() {
   const renderHeader = element => {
@@ -35,6 +36,7 @@ function App() {
         <Route path="/services" element={renderHeader(<Services />)} />
         <Route path="/dashboard" element={renderHeader(<Dashboard />)} />
         <Route path="/order" element={renderHeader(<NewOrder />)} />
+        <Route path="/myorder" element={renderHeader(<MyOrder />)} />
       </Routes>
       <Footer />
     </Router>
