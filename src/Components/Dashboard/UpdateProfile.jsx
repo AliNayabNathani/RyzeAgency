@@ -14,7 +14,7 @@ import { useNavigate } from 'react-router-dom';
 const UpdateProfile = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [mobileNumber, setMobileNumber] = useState('');
+  // const [mobileNumber, setMobileNumber] = useState('');
 
   const navigate = useNavigate();
   // const dispatch = useDispatch();
@@ -72,14 +72,14 @@ const UpdateProfile = () => {
               focusBorderColor="#db182c"
               color={'white'}
             />
-            <Input
+            {/* <Input
               value={mobileNumber}
               onChange={e => setMobileNumber(e.target.value)}
               placeholder="Mobile Number"
               type={'text'}
               focusBorderColor="#db182c"
               color={'white'}
-            />
+            /> */}
 
             <Button
               color={'white'}
