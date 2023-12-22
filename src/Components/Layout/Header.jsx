@@ -111,7 +111,7 @@ export default function WithSubnavigation({ isAuthenticated, user }) {
             maxH={'34px'}
             w={['45px', 'auto']}
             h={['auto', 'auto']}
-            mr={{ base: '20%', md: '6%', lg: '5%', xl: '15%' }}
+            mr={{ base: '75%', md: '6%', lg: '5%', xl: '15%' }}
             onClick={handleClick}
             cursor={'pointer'}
           />
