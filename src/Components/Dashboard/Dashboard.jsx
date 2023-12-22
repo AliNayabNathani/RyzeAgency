@@ -5,6 +5,7 @@ import {
   Container,
   HStack,
   Icon,
+  Image,
   Stack,
   Text,
   VStack,
@@ -12,8 +13,10 @@ import {
 import React from 'react';
 import { ReactComponent as OrderWallet } from '../../Assets/Icons/wallet.svg';
 import { ReactComponent as OrderBag } from '../../Assets/Icons/shopping_bag.svg';
+import DollarIcon from '../../Assets/Icons/DollarIcon.png';
 import UserAvatar from '../../Assets/Images/User-avatar.jpg';
 import { Link } from 'react-router-dom';
+import { AddIcon } from '@chakra-ui/icons';
 
 const Dashboard = () => {
   return (
@@ -43,17 +46,18 @@ const Dashboard = () => {
             direction={['column', 'row']}
             spacing={[4, 8]}
           >
-            <Icon as={OrderBag} boxSize={8} />
+            <Image src={DollarIcon} w={'30px'} h={'30px'} />
             <VStack alignItems={['center', 'flex-start']}>
               <Text color={'white'} fontSize={'xl'} fontWeight={'bold'}>
-                Your total orders
+                Your Wallet
               </Text>
               <Text color={'white'} fontSize={'xl'} fontWeight={'bold'}>
-                3
+                $100
               </Text>
             </VStack>
           </Stack>
         </Stack>
+
         <Stack
           bg={'rgb(26, 23, 46)'}
           borderRadius={'20px'}
@@ -76,7 +80,31 @@ const Dashboard = () => {
             </VStack>
           </Stack>
         </Stack>
+
+        <Stack
+          bg={'rgb(26, 23, 46)'}
+          borderRadius={'20px'}
+          w={['100%', 'auto']}
+        >
+          <Stack
+            p={6}
+            alignItems={['center', 'flex-start']}
+            direction={['column', 'row']}
+            spacing={[4, 8]}
+          >
+            <Icon as={OrderBag} boxSize={8} />
+            <VStack alignItems={['center', 'flex-start']}>
+              <Text color={'white'} fontSize={'xl'} fontWeight={'bold'}>
+                Your total orders
+              </Text>
+              <Text color={'white'} fontSize={'xl'} fontWeight={'bold'}>
+                3
+              </Text>
+            </VStack>
+          </Stack>
+        </Stack>
       </Stack>
+
       <Stack
         justifyContent={'center'}
         direction={['column', 'row']}
@@ -114,10 +142,26 @@ const Dashboard = () => {
           </HStack>
           <HStack>
             <Text fontWeight={'bold'} color={'white'}>
+              Phone Number
+            </Text>
+            <Text color={'white'}>03313999101</Text>
+          </HStack>
+          <HStack>
+            <Text fontWeight={'bold'} color={'white'}>
               Created At
             </Text>
             <Text color={'white'}>22/12/23</Text>
           </HStack>
+          <Button
+            color={'white'}
+            bg={'#db182c'}
+            _hover={{ bg: '#e93c4e' }}
+            borderRadius={'5px'}
+            p={[6, 6]}
+          >
+            <AddIcon mr={2} />
+            Add Funds
+          </Button>
           <Stack direction={['column', 'row']} alignItems="center" mt={4}>
             <Link to="/updateprofile">
               <Button
@@ -127,7 +171,7 @@ const Dashboard = () => {
                 borderRadius={'5px'}
                 p={[6, 6]}
               >
-                Update Profile
+                Edit Profile
               </Button>
             </Link>
 

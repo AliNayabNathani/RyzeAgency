@@ -22,7 +22,7 @@ import { useNavigate } from 'react-router-dom';
 
 const MyOrder = () => {
   const navigate = useNavigate();
-  const order = true;
+  const order = false;
   const handleMakeOrderClick = () => {
     navigate('/order');
   };
