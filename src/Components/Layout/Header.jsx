@@ -43,7 +43,7 @@ export default function WithSubnavigation({ isAuthenticated, user }) {
         },
         {
           label: 'New Orders',
-          href: '#',
+          href: '/order',
         },
         {
           label: 'My Orders',

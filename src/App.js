@@ -8,6 +8,7 @@ import Login from './Components/Auth/Login/Login';
 import Signup from './Components/Auth/Signup/Signup';
 import Services from './Components/ServicesPage/Services';
 import Dashboard from './Components/Dashboard/Dashboard';
+import NewOrder from './Components/New Order/NewOrder';
 
 function App() {
   const renderHeader = element => {
@@ -33,6 +34,7 @@ function App() {
         <Route path="/register" element={renderHeader(<Signup />)} />
         <Route path="/services" element={renderHeader(<Services />)} />
         <Route path="/dashboard" element={renderHeader(<Dashboard />)} />
+        <Route path="/order" element={renderHeader(<NewOrder />)} />
       </Routes>
       <Footer />
     </Router>
