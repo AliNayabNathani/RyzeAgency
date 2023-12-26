@@ -27,6 +27,8 @@ import {
 import headerLogo from '../../Assets/Images/Logo.png';
 import { useNavigate } from 'react-router-dom';
 import { FiChevronDown } from 'react-icons/fi';
+import { logoutUser } from '../../Redux/actions/user';
+import { useDispatch } from 'react-redux';
 
 export default function WithSubnavigation({ isAuthenticated, user }) {
   const navItems = isAuthenticated
@@ -67,10 +69,10 @@ export default function WithSubnavigation({ isAuthenticated, user }) {
     navigate(path);
   };
 
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const handleLogout = e => {
     e.preventDefault();
-    // dispatch(logoutUser());
+    dispatch(logoutUser());
   };
 
   return (

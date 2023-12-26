@@ -18,7 +18,8 @@ import UserAvatar from '../../Assets/Images/User-avatar.jpg';
 import { Link } from 'react-router-dom';
 import { AddIcon } from '@chakra-ui/icons';
 
-const Dashboard = () => {
+const Dashboard = ({ user }) => {
+  console.log('USER' + user);
   return (
     <Container
       minH={'100vh'}
@@ -140,12 +141,12 @@ const Dashboard = () => {
             </Text>
             <Text color={'white'}>nayabnathani6@gmail.com</Text>
           </HStack>
-          <HStack>
+          {/* <HStack>
             <Text fontWeight={'bold'} color={'white'}>
               Phone Number
             </Text>
             <Text color={'white'}>03313999101</Text>
-          </HStack>
+          </HStack> */}
           <HStack>
             <Text fontWeight={'bold'} color={'white'}>
               Created At

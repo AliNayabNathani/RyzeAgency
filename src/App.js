@@ -12,14 +12,11 @@ import NewOrder from './Components/New Order/NewOrder';
 import MyOrder from './Components/MyOrders/MyOrder';
 import ChangePassword from './Components/Dashboard/ChangePassword';
 import UpdateProfile from './Components/Dashboard/UpdateProfile';
+import { useSelector } from 'react-redux';
 
 function App() {
+  const { isAuthenticated, user } = useSelector(state => state.user);
   const renderHeader = element => {
-    const isAuthenticated = true;
-    const user = {
-      name: 'Ali Nayab',
-    };
-
     return (
       <>
         <WithSubnavigation isAuthenticated={isAuthenticated} user={user} />
@@ -36,7 +33,10 @@ function App() {
         <Route path="/login" element={renderHeader(<Login />)} />
         <Route path="/register" element={renderHeader(<Signup />)} />
         <Route path="/services" element={renderHeader(<Services />)} />
-        <Route path="/dashboard" element={renderHeader(<Dashboard />)} />
+        <Route
+          path="/dashboard"
+          element={renderHeader(<Dashboard user={user} />)}
+        />
         <Route path="/order" element={renderHeader(<NewOrder />)} />
         <Route path="/myorder" element={renderHeader(<MyOrder />)} />
         <Route

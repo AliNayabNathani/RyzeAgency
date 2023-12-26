@@ -14,15 +14,67 @@ import {
   HStack,
   Link as ChakraLink,
   Image,
+  useToast,
 } from '@chakra-ui/react';
-import React, { useState } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { AiOutlineMail, AiOutlineLock, AiOutlineEye } from 'react-icons/ai';
 import WebLogo from '../../../Assets/Images/Logo.png';
+import { useDispatch, useSelector } from 'react-redux';
+import { loginUser } from '../../../Redux/actions/user';
 
 const Login = () => {
   const [show, setShow] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const toast = useToast();
   const handleShowPassword = () => setShow(!show);
+
+  const { message, error, isAuthenticated, user } = useSelector(
+    state => state.user
+  );
+
+  const handleEmailChange = event => {
+    setEmail(event.target.value);
+  };
+
+  const handlePasswordChange = event => {
+    setPassword(event.target.value);
+  };
+
+  const handleLogin = e => {
+    // e.preventDefault();
+    dispatch(loginUser(email, password));
+  };
+
+  useEffect(() => {
+    if (error) {
+      toast({
+        title: 'Login Failed',
+        description: error,
+        position: 'top',
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+      });
+      dispatch({ type: 'clearError' });
+    }
+    if (message && isAuthenticated) {
+      navigate('/');
+      toast({
+        title: 'Login Successful!',
+        description: `Welcome Back ${user.name}`,
+        position: 'top',
+        status: 'success',
+        duration: 5000,
+        isClosable: true,
+      });
+      dispatch({ type: 'clearMessage' });
+    }
+  }, [dispatch, error, message]);
+
   return (
     <Container
       minH={'100vh'}
@@ -65,6 +117,8 @@ const Login = () => {
                 p="1.8rem"
                 paddingLeft="3rem"
                 focusBorderColor="#db182c"
+                value={email}
+                onChange={handleEmailChange}
               />
             </InputGroup>
             <InputGroup>
@@ -91,6 +145,8 @@ const Login = () => {
                 p="1.8rem"
                 paddingLeft="3rem"
                 focusBorderColor="#db182c"
+                value={password}
+                onChange={handlePasswordChange}
               />
               <InputRightElement
                 _hover={{
@@ -116,6 +172,9 @@ const Login = () => {
                 boxShadow: 'xl',
               }}
               borderRadius={'20px'}
+              onClick={() => {
+                handleLogin();
+              }}
             >
               Sign In
             </Button>

@@ -1,18 +1,22 @@
-import { ChakraProvider, ColorModeScript } from '@chakra-ui/react';
-import React, { StrictMode } from 'react';
-import * as ReactDOM from 'react-dom/client';
+import { ChakraProvider } from '@chakra-ui/react';
+import React from 'react';
+import { createRoot } from 'react-dom/client';
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
+import { store, persistor } from './Redux/store';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
-import * as serviceWorker from './serviceWorker';
-import theme from './theme';
+import theme from './theme.js';
 
 const container = document.getElementById('root');
-const root = ReactDOM.createRoot(container);
 
-root.render(
-  <StrictMode>
+createRoot(container).render(
+  <React.StrictMode>
     <ChakraProvider theme={theme}>
-      <App />
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <App />
+        </PersistGate>
+      </Provider>
     </ChakraProvider>
-  </StrictMode>
+  </React.StrictMode>
 );
