@@ -24,6 +24,3 @@ export const persistor = persistStore(store);
 
 export default store;
 export const server = 'http://localhost:5000/api/v1';
-export const pictureServer = 'http://localhost:5000/uploadPicture';
-export const videoServer = 'http://localhost:5000/uploadVideo';
-export const pdfServer = 'http://localhost:5000/uploadPdf';

@@ -45,7 +45,7 @@ function App() {
         />
         <Route
           path="/updateprofile"
-          element={renderHeader(<UpdateProfile />)}
+          element={renderHeader(<UpdateProfile user={user} />)}
         />
       </Routes>
       <Footer />

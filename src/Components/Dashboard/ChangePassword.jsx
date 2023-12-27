@@ -7,23 +7,54 @@ import {
   Input,
   Stack,
   VStack,
+  useToast,
 } from '@chakra-ui/react';
+import axios from 'axios';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { server } from '../../Redux/store';
 
 const ChangePassword = () => {
   const [oldPassword, setOldPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
-
+  const toast = useToast();
   const navigate = useNavigate();
   // const dispatch = useDispatch();
 
   const submitHandler = async e => {
     e.preventDefault();
-    // await dispatch(updateProfile(name,email));
-    // dispatch(loadUser());
-    navigate('/dashboard');
+
+    try {
+      const response = await axios.patch(
+        `${server}/users/updateUserPassword`,
+        { oldPassword, newPassword },
+        { withCredentials: true }
+      );
+
+      console.log('res', response);
+
+      toast({
+        title: 'Profile Updated',
+        description: 'Your password has been successfully updated!',
+        status: 'success',
+        position: 'top',
+        duration: 5000,
+        isClosable: true,
+      });
+      navigate('/dashboard');
+    } catch (error) {
+      console.error('Error updating user:', error);
+      toast({
+        title: 'Error',
+        description: 'An error occurred while updating your password.',
+        status: 'error',
+        position: 'top',
+        duration: 5000,
+        isClosable: true,
+      });
+    }
   };
+
   return (
     <Container
       minH={'100vh'}
@@ -59,7 +90,7 @@ const ChangePassword = () => {
               onChange={e => setOldPassword(e.target.value)}
               placeholder="Old Password..."
               type={'password'}
-              focusBorderColor="#db182c"
+              focusBorderColor="#25aae1"
               color={'white'}
             />
 
@@ -68,13 +99,13 @@ const ChangePassword = () => {
               onChange={e => setNewPassword(e.target.value)}
               placeholder="New Password..."
               type={'password'}
-              focusBorderColor="#db182c"
+              focusBorderColor="#25aae1"
               color={'white'}
             />
             <Button
               color={'white'}
-              bg={'#db182c'}
-              _hover={{ bg: '#e93c4e' }}
+              bg={'#25aae1'}
+              _hover={{ bg: '#167AA3' }}
               borderRadius={'5px'}
               p={[6, 6]}
               type="submit"

@@ -91,7 +91,7 @@ const NewOrder = () => {
               border={'1px solid white'}
               _placeholder={{ color: 'whiteAlpha.700' }}
               bg={'#1a172e'}
-              focusBorderColor="#db182c"
+              focusBorderColor="#25aae1"
               _hover={{ bg: '#1a172e' }}
               w={['100%', '100%']}
               value={profileLink}
@@ -107,7 +107,7 @@ const NewOrder = () => {
               border={'1px solid white'}
               _placeholder={{ color: 'whiteAlpha.700' }}
               bg={'#1a172e'}
-              focusBorderColor="#db182c"
+              focusBorderColor="#25aae1"
               _hover={{ bg: '#1a172e' }}
               w={['100%', '100%']}
               value={amount}
@@ -125,8 +125,8 @@ const NewOrder = () => {
             <Button
               mt={6}
               color={'white'}
-              bg={'#db182c'}
-              _hover={{ bg: '#e93c4e' }}
+              bg={'#25aae1'}
+              _hover={{ bg: '#167AA3' }}
               borderRadius={'5px'}
               p={[6, 6]}
               w={'100%'}

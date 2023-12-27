@@ -116,7 +116,7 @@ const Login = () => {
                 }}
                 p="1.8rem"
                 paddingLeft="3rem"
-                focusBorderColor="#db182c"
+                focusBorderColor="#25aae1"
                 value={email}
                 onChange={handleEmailChange}
               />
@@ -144,7 +144,7 @@ const Login = () => {
                 }}
                 p="1.8rem"
                 paddingLeft="3rem"
-                focusBorderColor="#db182c"
+                focusBorderColor="#25aae1"
                 value={password}
                 onChange={handlePasswordChange}
               />

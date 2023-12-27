@@ -1,11 +1,17 @@
 import { server } from '../store';
 import axios from 'axios';
 
-export const registerUser = formData => async dispatch => {
+export const registerUser = (userName, email, password) => async dispatch => {
   try {
     dispatch({ type: 'registerRequest' });
 
-    const response = await axios.post(`${server}/user/register`, formData, {
+    const requestData = {
+      email: email,
+      name: userName,
+      password: password,
+    };
+
+    const response = await axios.post(`${server}/auth/register`, requestData, {
       headers: {
         'Content-Type': 'application/json',
       },

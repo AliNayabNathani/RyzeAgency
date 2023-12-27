@@ -60,7 +60,7 @@ const Home = () => {
           <Heading color={'white'} fontSize={['4xl', '6xl']}>
             Cheapest & Best
           </Heading>
-          <Heading color={'#db182c'} fontSize={['4xl', '6xl']}>
+          <Heading color={'#25aae1'} fontSize={['4xl', '6xl']}>
             SMM
           </Heading>
           <Heading color={'white'} fontSize={['4xl', '6xl']}>
@@ -69,8 +69,8 @@ const Home = () => {
           <Button
             mt={4}
             color={'white'}
-            bg={'#db182c'}
-            _hover={{ bg: '#e93c4e' }}
+            bg={'#25aae1'}
+            _hover={{ bg: '#167AA3' }}
             borderRadius={'full'}
             w={{ base: 'auto', md: '100%', lg: '40%' }}
             p={[6, 6]}
@@ -81,12 +81,12 @@ const Home = () => {
           <Button
             mt={4}
             color={'white'}
-            border={'1px solid #db182c'}
+            border={'1px solid #25aae1'}
             borderRadius={'full'}
             w={{ base: 'auto', md: '100%', lg: '40%' }}
             p={[6, 6]}
             variant={'outline'}
-            _hover={{ bg: '#db182c' }}
+            _hover={{ bg: '#25aae1' }}
           >
             <Image
               src={AnonIcon}
@@ -110,7 +110,7 @@ const Home = () => {
       <Stack
         w={'100%'}
         mt={[4, 6]}
-        border={'3px solid #db182c'}
+        border={'3px solid #25aae1'}
         borderRadius={'10px'}
         bg={'#050317'}
         p={[4, 8]}
@@ -133,7 +133,7 @@ const Home = () => {
               key={index}
               mt={4}
               color={'white'}
-              border={'2px solid #db182c'}
+              border={'2px solid #25aae1'}
               borderRadius={'full'}
               p={[2, 4]}
             >
@@ -147,8 +147,8 @@ const Home = () => {
         <Button
           mt={4}
           color={'white'}
-          bg={'#db182c'}
-          _hover={{ bg: '#e93c4e' }}
+          bg={'#25aae1'}
+          _hover={{ bg: '#167AA3' }}
           borderRadius={'full'}
           w={{ base: 'auto', md: '80%', lg: '80%' }}
           p={[6, 8]}
@@ -160,7 +160,7 @@ const Home = () => {
         </Button>
       </Stack>
       <Stack mt={[8, 16]} w={'100%'} p={[4, 8]} alignItems={'center'}>
-        <Heading color={'#db182c'} fontStyle={'italic'} fontSize={['sm', 'md']}>
+        <Heading color={'#25aae1'} fontStyle={'italic'} fontSize={['sm', 'md']}>
           Three Easy Steps
         </Heading>
         <Heading color={'white'} fontSize={['lg', '2xl']}>
@@ -178,7 +178,7 @@ const Home = () => {
             alignItems={['center', 'flex-start']}
             w={['100%', '20%']}
           >
-            <Heading color={'#db182c'}>01</Heading>
+            <Heading color={'#25aae1'}>01</Heading>
             <VStack>
               <Heading as={'h5'} color={'white'} fontSize={'19px'}>
                 Choose your desired social media platform
@@ -195,7 +195,7 @@ const Home = () => {
             alignItems={['center', 'flex-start']}
             w={['100%', '19%']}
           >
-            <Heading color={'#db182c'}>02</Heading>
+            <Heading color={'#25aae1'}>02</Heading>
             <VStack>
               <Heading as={'h5'} color={'white'} fontSize={'19px'}>
                 Choose the type of service you need
@@ -211,7 +211,7 @@ const Home = () => {
             alignItems={['center', 'flex-start']}
             w={['100%', '30%']}
           >
-            <Heading color={'#db182c'}>03</Heading>
+            <Heading color={'#25aae1'}>03</Heading>
             <VStack>
               <Heading as={'h5'} color={'white'} fontSize={'19px'}>
                 Enter your order details and complete the payment
@@ -229,7 +229,7 @@ const Home = () => {
       <Stack
         w={'100%'}
         mt={[4, 6]}
-        border={'3px solid #db182c'}
+        border={'3px solid #25aae1'}
         borderRadius={'30px'}
         bg={'#050317'}
         p={[4, 8]}
@@ -260,8 +260,8 @@ const Home = () => {
         <Button
           mt={6}
           color={'white'}
-          bg={'#db182c'}
-          _hover={{ bg: '#e93c4e' }}
+          bg={'#25aae1'}
+          _hover={{ bg: '#167AA3' }}
           borderRadius={'full'}
           w={{ base: 'auto', md: '80%', lg: '80%' }}
           p={[6, 8]}
@@ -282,12 +282,12 @@ const Home = () => {
           <Accordion
             allowMultiple
             w={['100%', '50%']}
-            border={'1px solid #db182c'}
+            border={'1px solid #25aae1'}
             color={'white'}
           >
             <AccordionItem p={4}>
               <h2>
-                <AccordionButton color={'#db182c'}>
+                <AccordionButton color={'#25aae1'}>
                   <Box as="span" flex="1" textAlign="left" color={'white'}>
                     What is an SMM panel?
                   </Box>
@@ -306,12 +306,12 @@ const Home = () => {
           <Accordion
             allowMultiple
             w={['100%', '50%']}
-            border={'1px solid #db182c'}
+            border={'1px solid #25aae1'}
             color={'white'}
           >
             <AccordionItem p={4}>
               <h2>
-                <AccordionButton color={'#db182c'}>
+                <AccordionButton color={'#25aae1'}>
                   <Box as="span" flex="1" textAlign="left" color={'white'}>
                     How do I place an order on your SMM panel?
                   </Box>
@@ -340,12 +340,12 @@ const Home = () => {
           <Accordion
             allowMultiple
             w={['100%', '50%']}
-            border={'1px solid #db182c'}
+            border={'1px solid #25aae1'}
             color={'white'}
           >
             <AccordionItem p={4}>
               <h2>
-                <AccordionButton color={'#db182c'}>
+                <AccordionButton color={'#25aae1'}>
                   <Box as="span" flex="1" textAlign="left" color={'white'}>
                     Is my information and account safe when using your SMM
                     panel?
@@ -366,12 +366,12 @@ const Home = () => {
           <Accordion
             allowMultiple
             w={['100%', '50%']}
-            border={'1px solid #db182c'}
+            border={'1px solid #25aae1'}
             color={'white'}
           >
             <AccordionItem p={4}>
               <h2>
-                <AccordionButton color={'#db182c'}>
+                <AccordionButton color={'#25aae1'}>
                   <Box
                     as="span"
                     flex="1"
@@ -403,12 +403,12 @@ const Home = () => {
           <Accordion
             allowMultiple
             w={['100%', '50%']}
-            border={'1px solid #db182c'}
+            border={'1px solid #25aae1'}
             color={'white'}
           >
             <AccordionItem p={4}>
               <h2>
-                <AccordionButton color={'#db182c'}>
+                <AccordionButton color={'#25aae1'}>
                   <Box as="span" flex="1" textAlign="left" color={'white'}>
                     What is a Reseller Panel?
                   </Box>
@@ -448,12 +448,12 @@ const Home = () => {
           <Accordion
             allowMultiple
             w={['100%', '50%']}
-            border={'1px solid #db182c'}
+            border={'1px solid #25aae1'}
             color={'white'}
           >
             <AccordionItem p={4}>
               <h2>
-                <AccordionButton color={'#db182c'}>
+                <AccordionButton color={'#25aae1'}>
                   <Box as="span" flex="1" textAlign="left" color={'white'}>
                     Can I earn money?
                   </Box>
@@ -487,7 +487,7 @@ const Home = () => {
         marginInline={'auto'}
         w={['100%', '80%']}
         mt={[10, 6]}
-        border={'3px solid #db182c'}
+        border={'3px solid #25aae1'}
         borderRadius={'10px'}
         bg={'#050317'}
         p={[8, 10]}
@@ -507,8 +507,8 @@ const Home = () => {
           <Button
             mt={4}
             color={'white'}
-            bg={'#db182c'}
-            _hover={{ bg: '#e93c4e' }}
+            bg={'#25aae1'}
+            _hover={{ bg: '#167AA3' }}
             borderRadius={'full'}
             w={{ base: 'auto', md: '100%', lg: '40%' }}
             alignSelf={['center', 'baseline']}

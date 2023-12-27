@@ -1,4 +1,5 @@
 import {
+  Box,
   Container,
   Heading,
   Icon,
@@ -13,19 +14,73 @@ import {
   Thead,
   Tr,
 } from '@chakra-ui/react';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import searchImg from '../../Assets/Images/SearchIcon.png';
 import orderIcon from '../../Assets/Images/orders-icon.png';
 import { FaBox } from 'react-icons/fa';
+import Select from 'react-select';
 
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { server } from '../../Redux/store';
 
 const MyOrder = () => {
+  const [selectedService, setSelectedService] = useState(null);
+  const options = [
+    { value: 'pending', label: 'Pending' },
+    { value: 'delivered', label: 'Delivered' },
+    { value: 'canceled', label: 'Canceled' },
+  ];
+  const [selectedOption, setSelectedOption] = useState(options[0]);
   const navigate = useNavigate();
-  const order = false;
+  const [userOrders, setUserOrders] = useState([]);
+  const [order, setOrder] = useState(true);
+
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(`${server}/order/my-orders`, {
+        withCredentials: true,
+        params: {
+          status: selectedOption.value,
+        },
+      });
+      console.log('RESPONSE', response.data);
+      setUserOrders(response.data.userOrders);
+      setOrder(response.data.userOrders.length > 0);
+    } catch (error) {
+      console.error('Error fetching My Orders:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, [selectedOption]);
+
   const handleMakeOrderClick = () => {
     navigate('/order');
   };
+  const customStyles = {
+    control: (provided, state) => ({
+      ...provided,
+      backgroundColor: '#1a172e',
+      border: '1px solid white',
+      boxShadow: state.isFocused ? '0 0 0 2px #ffffff' : 'none',
+    }),
+    option: (provided, state) => ({
+      ...provided,
+      backgroundColor: state.isSelected ? '#07041c' : '#1a172e',
+      color: 'white',
+    }),
+    menu: provided => ({
+      ...provided,
+      backgroundColor: '#1a172e',
+    }),
+    singleValue: provided => ({
+      ...provided,
+      color: 'white',
+    }),
+  };
+
   return (
     <Container
       minH={'100vh'}
@@ -46,6 +101,22 @@ const MyOrder = () => {
         <Icon as={FaBox} color={'white'} boxSize={8} mx={4} />
         <Heading color={'white'}>MY ORDERS</Heading>
       </Stack>
+      {/* SearchBar and Select */}
+      <Stack
+        direction={['column', 'row']}
+        my={8}
+        p={[4, 4]}
+        w={'100%'}
+        bg={'#1a172e'}
+        justifyContent={['center', 'space-between']}
+      >
+        <Select
+          options={options}
+          value={selectedOption}
+          onChange={setSelectedOption}
+          styles={customStyles}
+        />
+      </Stack>
       {order === true ? (
         <>
           <Stack
@@ -64,21 +135,42 @@ const MyOrder = () => {
                     <Th>Service</Th>
                     <Th>Amount</Th>
                     <Th>Price</Th>
+                    <Th>Order Date</Th>
+                    <Th>Status</Th>
                   </Tr>
                 </Thead>
                 <Tbody color={'white'}>
-                  <Tr>
-                    <Td>1</Td>
-                    <Td>Twitch Subs</Td>
-                    <Td>100</Td>
-                    <Td>$70.00</Td>
-                  </Tr>
-                  <Tr>
-                    <Td>2</Td>
-                    <Td>Twitch Bits</Td>
-                    <Td>3000</Td>
-                    <Td>$10.00</Td>
-                  </Tr>
+                  {userOrders.map((order, index) => (
+                    <Tr key={order._id}>
+                      <Td>{index + 1}</Td>
+                      <Td>{order.category}</Td>
+                      <Td>
+                        {order.details.amount} {order.details.type}
+                      </Td>
+                      <Td>{order.totalPrice}</Td>
+                      <Td>
+                        {new Date(order.createdAt).toLocaleDateString('en-GB')}
+                      </Td>
+                      <Td>
+                        <Box
+                          bg={
+                            order.status === 'pending'
+                              ? 'yellow.500'
+                              : order.status === 'delivered'
+                              ? 'green.500'
+                              : order.status === 'canceled'
+                              ? 'red.500'
+                              : 'gray.500'
+                          }
+                          w={'fit-content'}
+                          borderRadius={'full'}
+                          p={'1rem'}
+                        >
+                          {order.status}
+                        </Box>
+                      </Td>
+                    </Tr>
+                  ))}
                 </Tbody>
               </Table>
             </TableContainer>
@@ -101,7 +193,7 @@ const MyOrder = () => {
               You didn’t create any orders yet
             </Heading>
             <Heading
-              color={'#db182c'}
+              color={'#25aae1'}
               onClick={handleMakeOrderClick}
               cursor={'pointer'}
               _hover={{ color: 'white' }}

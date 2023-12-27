@@ -14,15 +14,84 @@ import {
   HStack,
   Link as ChakraLink,
   Image,
+  useToast,
 } from '@chakra-ui/react';
-import React, { useState } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { AiOutlineMail, AiOutlineLock, AiOutlineEye } from 'react-icons/ai';
 import WebLogo from '../../../Assets/Images/Logo.png';
+import { registerUser } from '../../../Redux/actions/user';
+import { useDispatch, useSelector } from 'react-redux';
 
 const Signup = () => {
   const [show, setShow] = useState(false);
+  const [userName, setUserName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const toast = useToast();
   const handleShowPassword = () => setShow(!show);
+
+  const { message, error, loading } = useSelector(state => state.user);
+
+  const handleEmailChange = event => {
+    setEmail(event.target.value);
+  };
+
+  const handlePasswordChange = event => {
+    setPassword(event.target.value);
+  };
+
+  const handleUsernameChange = event => {
+    setUserName(event.target.value);
+  };
+
+  const handleSignUp = async () => {
+    await dispatch(registerUser(userName, email, password));
+
+    setUserName('');
+    setEmail('');
+    setPassword('');
+  };
+
+  useEffect(() => {
+    // Clear message and error when the component mounts
+    dispatch({ type: 'clearMessage' });
+    dispatch({ type: 'clearError' });
+
+    // ... (existing code)
+
+    return () => {
+      // Clear message and error when the component unmounts
+      dispatch({ type: 'clearMessage' });
+      dispatch({ type: 'clearError' });
+    };
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (message) {
+      toast({
+        title: 'Registration Successful!',
+        position: 'top',
+        status: 'success',
+        duration: 5000,
+        isClosable: true,
+      });
+    }
+
+    if (error) {
+      toast({
+        title: 'Registration Failed',
+        description: error.message,
+        position: 'top',
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+      });
+    }
+  }, [message, error, toast]);
+
   return (
     <Container
       minH={'100vh'}
@@ -54,7 +123,9 @@ const Signup = () => {
                 }}
                 p="1.8rem"
                 paddingLeft="1rem"
-                focusBorderColor="#db182c"
+                focusBorderColor="#25aae1"
+                value={userName}
+                onChange={handleUsernameChange}
               />
             </InputGroup>
             <InputGroup>
@@ -79,7 +150,9 @@ const Signup = () => {
                 }}
                 p="1.8rem"
                 paddingLeft="3rem"
-                focusBorderColor="#db182c"
+                focusBorderColor="#25aae1"
+                value={email}
+                onChange={handleEmailChange}
               />
             </InputGroup>
             <InputGroup>
@@ -105,7 +178,9 @@ const Signup = () => {
                 }}
                 p="1.8rem"
                 paddingLeft="3rem"
-                focusBorderColor="#db182c"
+                focusBorderColor="#25aae1"
+                value={password}
+                onChange={handlePasswordChange}
               />
               <InputRightElement
                 _hover={{
@@ -131,6 +206,10 @@ const Signup = () => {
                 boxShadow: 'xl',
               }}
               borderRadius={'20px'}
+              onClick={() => {
+                handleSignUp();
+              }}
+              isLoading={loading}
             >
               Create Account
             </Button>

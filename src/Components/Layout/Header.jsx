@@ -28,9 +28,13 @@ import headerLogo from '../../Assets/Images/Logo.png';
 import { useNavigate } from 'react-router-dom';
 import { FiChevronDown } from 'react-icons/fi';
 import { logoutUser } from '../../Redux/actions/user';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { server } from '../../Redux/store';
+import axios from 'axios';
 
 export default function WithSubnavigation({ isAuthenticated, user }) {
+  const [name, setName] = useState('dsad');
   const navItems = isAuthenticated
     ? [
         {
@@ -59,6 +63,8 @@ export default function WithSubnavigation({ isAuthenticated, user }) {
 
   const { isOpen, onToggle } = useDisclosure();
   const navigate = useNavigate();
+  const updatedUser = useSelector(state => state.user.user);
+  // console.log('UPDATED', updatedUser);
 
   const handleClick = () => {
     navigate('/');
@@ -135,7 +141,7 @@ export default function WithSubnavigation({ isAuthenticated, user }) {
                     py={2}
                     transition="all 0.3s"
                     _focus={{ boxShadow: 'none' }}
-                    w={['auto', '150px']}
+                    w={['auto', '195px']}
                   >
                     <HStack>
                       <Text
@@ -143,13 +149,13 @@ export default function WithSubnavigation({ isAuthenticated, user }) {
                         fontWeight={'semibold'}
                         display={{ base: 'none', md: 'flex' }}
                       >
-                        {user.name}
+                        {updatedUser.name}
                       </Text>
                       <Avatar
                         size={'sm'}
-                        name={user.name}
+                        name={updatedUser.name}
                         color={'white'}
-                        bg={'#db182c'}
+                        bg={'#25aae1'}
                       />
                       <VStack
                         display={{ base: 'none', md: 'flex' }}
@@ -189,11 +195,11 @@ export default function WithSubnavigation({ isAuthenticated, user }) {
                 fontWeight={400}
                 variant={'outline'}
                 href={'#'}
-                borderColor={'#db182c'}
-                color={'#db182c'}
+                borderColor={'#25aae1'}
+                color={'#25aae1'}
                 _hover={{
                   color: 'white',
-                  bg: '#e93c4e',
+                  bg: '#167AA3',
                 }}
                 onClick={event => handleNavigate(event, '/register')}
               >
@@ -205,10 +211,10 @@ export default function WithSubnavigation({ isAuthenticated, user }) {
                 fontSize={'sm'}
                 fontWeight={600}
                 color={'white'}
-                bg={'#db182c'}
+                bg={'#25aae1'}
                 href={'#'}
                 _hover={{
-                  bg: '#e93c4e',
+                  bg: '#167AA3',
                 }}
                 onClick={event => handleNavigate(event, '/login')}
               >

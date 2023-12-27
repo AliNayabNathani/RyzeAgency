@@ -10,16 +10,70 @@ import {
   Text,
   VStack,
 } from '@chakra-ui/react';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { ReactComponent as OrderWallet } from '../../Assets/Icons/wallet.svg';
 import { ReactComponent as OrderBag } from '../../Assets/Icons/shopping_bag.svg';
 import DollarIcon from '../../Assets/Icons/DollarIcon.png';
 import UserAvatar from '../../Assets/Images/User-avatar.jpg';
 import { Link } from 'react-router-dom';
 import { AddIcon } from '@chakra-ui/icons';
+import { server } from '../../Redux/store';
+import axios from 'axios';
+import Loader from '../Layout/Loader/Loader';
 
 const Dashboard = ({ user }) => {
-  console.log('USER' + user);
+  const [userData, setUserData] = useState(null);
+  const [orderData, setOrderData] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading1, setIsLoading1] = useState(true);
+
+  const fetchUserData = async () => {
+    try {
+      const response = await axios.get(
+        `${server}/users/showme/${user.userId}`,
+        {
+          withCredentials: true,
+        }
+      );
+
+      setUserData(response.data);
+      // console.log('RES', response.data);
+      setIsLoading(false);
+    } catch (error) {
+      console.error('Error fetching user details:', error);
+      setIsLoading(false);
+    }
+  };
+
+  const fetchTotalOrders = async () => {
+    try {
+      const response = await axios.get(
+        `${server}/order/my-orders?status=pending`,
+        {
+          withCredentials: true,
+        }
+      );
+
+      setOrderData(response.data.totalCount);
+      console.log('RES', response.data);
+      setIsLoading1(false);
+    } catch (error) {
+      console.error('Error fetching user details:', error);
+      setIsLoading1(false);
+    }
+  };
+
+  useEffect(() => {
+    if (user && user.userId) {
+      fetchUserData();
+      fetchTotalOrders();
+    }
+  }, [user]);
+
+  if (isLoading && isLoading1) {
+    return <Loader />;
+  }
+
   return (
     <Container
       minH={'100vh'}
@@ -53,7 +107,7 @@ const Dashboard = ({ user }) => {
                 Your Wallet
               </Text>
               <Text color={'white'} fontSize={'xl'} fontWeight={'bold'}>
-                $100
+                $ {userData.funds}
               </Text>
             </VStack>
           </Stack>
@@ -99,7 +153,7 @@ const Dashboard = ({ user }) => {
                 Your total orders
               </Text>
               <Text color={'white'} fontSize={'xl'} fontWeight={'bold'}>
-                3
+                {orderData ?? 0}
               </Text>
             </VStack>
           </Stack>
@@ -113,33 +167,18 @@ const Dashboard = ({ user }) => {
         spacing={['8', '16']}
         padding="8"
       >
-        {/* <VStack>
-          <Avatar boxSize={'48'} src={UserAvatar} />
-
-          <Button
-            mt={4}
-            color={'white'}
-            border={'1px solid #db182c'}
-            borderRadius={'5px'}
-            p={[6, 6]}
-            variant={'outline'}
-            _hover={{ bg: '#db182c' }}
-          >
-            Change Photo
-          </Button>
-        </VStack> */}
         <VStack spacing={'4'} alignItems={['center', 'flex-start']}>
           <HStack>
             <Text fontWeight={'bold'} color={'white'}>
               Name
             </Text>
-            <Text color={'white'}>Ali Nayab</Text>
+            <Text color={'white'}>{userData.name}</Text>
           </HStack>
           <HStack>
             <Text fontWeight={'bold'} color={'white'}>
               Email
             </Text>
-            <Text color={'white'}>nayabnathani6@gmail.com</Text>
+            <Text color={'white'}>{userData.email}</Text>
           </HStack>
           {/* <HStack>
             <Text fontWeight={'bold'} color={'white'}>
@@ -151,12 +190,14 @@ const Dashboard = ({ user }) => {
             <Text fontWeight={'bold'} color={'white'}>
               Created At
             </Text>
-            <Text color={'white'}>22/12/23</Text>
+            <Text color={'white'}>
+              {new Date(userData.createdAt).toLocaleDateString('en-GB')}
+            </Text>
           </HStack>
           <Button
             color={'white'}
-            bg={'#db182c'}
-            _hover={{ bg: '#e93c4e' }}
+            bg={'#25aae1'}
+            _hover={{ bg: '#167AA3' }}
             borderRadius={'5px'}
             p={[6, 6]}
           >
@@ -172,8 +213,8 @@ const Dashboard = ({ user }) => {
             <Link to="/updateprofile">
               <Button
                 color={'white'}
-                bg={'#db182c'}
-                _hover={{ bg: '#e93c4e' }}
+                bg={'#25aae1'}
+                _hover={{ bg: '#167AA3' }}
                 borderRadius={'5px'}
                 p={[6, 6]}
               >
@@ -184,11 +225,11 @@ const Dashboard = ({ user }) => {
             <Link to="/changepassword">
               <Button
                 color={'white'}
-                border={'1px solid #db182c'}
+                border={'1px solid #25aae1'}
                 borderRadius={'5px'}
                 p={[6, 6]}
                 variant={'outline'}
-                _hover={{ bg: '#db182c' }}
+                _hover={{ bg: '#25aae1' }}
               >
                 Change Password
               </Button>

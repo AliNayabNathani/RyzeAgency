@@ -75,16 +75,16 @@ export default function Footer() {
           {/* Navigation */}
           <Stack align={'flex-start'}>
             <ListHeader>Navigation</ListHeader>
-            <Box as="a" href={'#'} _hover={{ color: '#db182c' }}>
+            <Box as="a" href={'#'} _hover={{ color: '#25aae1' }}>
               Services
             </Box>
-            <Box as="a" href={'#'} _hover={{ color: '#db182c' }}>
+            <Box as="a" href={'#'} _hover={{ color: '#25aae1' }}>
               API
             </Box>
-            <Box as="a" href={'#'} _hover={{ color: '#db182c' }}>
+            <Box as="a" href={'#'} _hover={{ color: '#25aae1' }}>
               Reviews
             </Box>
-            <Box as="a" href={'#'} _hover={{ color: '#db182c' }}>
+            <Box as="a" href={'#'} _hover={{ color: '#25aae1' }}>
               Your Own SMM Panel
             </Box>
           </Stack>
@@ -92,13 +92,13 @@ export default function Footer() {
           {/* Dashboard */}
           <Stack align={'flex-start'}>
             <ListHeader>Dashboard</ListHeader>
-            <Box as="a" href={'/login'} _hover={{ color: '#db182c' }}>
+            <Box as="a" href={'/login'} _hover={{ color: '#25aae1' }}>
               Login
             </Box>
-            <Box as="a" href={'/register'} _hover={{ color: '#db182c' }}>
+            <Box as="a" href={'/register'} _hover={{ color: '#25aae1' }}>
               Register
             </Box>
-            <Box as="a" href={'#'} _hover={{ color: '#db182c' }}>
+            <Box as="a" href={'#'} _hover={{ color: '#25aae1' }}>
               Anonymous Order
             </Box>
           </Stack>
@@ -110,7 +110,7 @@ export default function Footer() {
               as="a"
               href={'#'}
               _hover={{ color: 'white' }}
-              color={'#db182c'}
+              color={'#25aae1'}
             >
               @RyzeAgency
             </Box>
