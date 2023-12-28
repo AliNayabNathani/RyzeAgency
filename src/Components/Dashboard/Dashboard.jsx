@@ -37,7 +37,7 @@ const Dashboard = ({ user }) => {
       );
 
       setUserData(response.data);
-      // console.log('RES', response.data);
+
       setIsLoading(false);
     } catch (error) {
       console.error('Error fetching user details:', error);

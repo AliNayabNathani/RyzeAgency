@@ -56,14 +56,11 @@ const Signup = () => {
   };
 
   useEffect(() => {
-    // Clear message and error when the component mounts
     dispatch({ type: 'clearMessage' });
     dispatch({ type: 'clearError' });
 
-    // ... (existing code)
-
     return () => {
-      // Clear message and error when the component unmounts
+      //component unmounts
       dispatch({ type: 'clearMessage' });
       dispatch({ type: 'clearError' });
     };
